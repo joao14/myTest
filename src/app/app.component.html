@@ -4,7 +4,8 @@
   <div class="card-body">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
-        <div class="form-group col">
+        <!-- Tipo de indentificacion-->
+        <div class="form-group col-5">
           <label>Tipo de Identificación</label>
           <select formControlName="type_indetificacion" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.type_indetificacion.errors }">
@@ -17,14 +18,19 @@
             <div *ngIf="f.type_indetificacion.errors.required">Tipo de indentificacion es requerido</div>
           </div>
         </div>
+        <!-- Identificacion-->
         <div class="form-group col-5">
           <label>Identificación</label>
           <input type="text" formControlName="identificacion" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.identificacion.errors }" />
           <div *ngIf="submitted && f.identificacion.errors" class="invalid-feedback">
             <div *ngIf="f.identificacion.errors.required">Identificación es requerida</div>
+            <div *ngIf="f.identificacion.errors.required">Identificación solo debe ser números</div>
           </div>
         </div>
+      </div>
+      <div class="form-row">
+        <!-- Nombres -->
         <div class="form-group col-5">
           <label>Nombres</label>
           <input type="text" formControlName="nombres" class="form-control"
@@ -33,41 +39,30 @@
             <div *ngIf="f.nombres.errors.required">Nombres es requerido</div>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label>Apellidos</label>
-        <input type="text" formControlName="apellidos" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }" />
-        <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
-          <div *ngIf="f.apellidos.errors.required">Apellidos es requerido</div>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col">
-          <label>Email</label>
-          <input type="text" formControlName="email" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email es requerido</div>
+        <!-- Apellidos-->
+        <div class="form-group col-5">
+          <label>Apellidos</label>
+          <input type="text" formControlName="apellidos" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }" />
+          <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
+            <div *ngIf="f.apellidos.errors.required">Apellidos es requerido</div>
           </div>
         </div>
       </div>
 
       <div class="form-row">
-        <div class="form-group col">
+        <!--Telefono-->
+        <div class="form-group col-5">
           <label>Teléfono</label>
           <input type="text" formControlName="telefono" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
           <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
             <div *ngIf="f.telefono.errors.required">Teléfono es requerido</div>
-            <div *ngIf="f.password.errors.minlength">Telefono debe tener una longitud de 12</div>
+            <div *ngIf="f.telefono.errors.minlength">Telefono debe tener una longitud de 12</div>
           </div>
         </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col">
+        <!--Celular-->
+        <div class="form-group col-5">
           <label>Celular</label>
           <input type="text" formControlName="celular" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.celular.errors }" />
@@ -79,29 +74,21 @@
       </div>
 
       <div class="form-row">
-        <div class="form-group col">
-          <label>Dirección</label>
-          <textarea formControlName="direccion" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.direccion.errors }" > </textarea>
-          <div *ngIf="submitted && f.direccion.errors" class="invalid-feedback">
-            <div *ngIf="f.direccion.errors.required">Dirección es requerido</div>
+        <!--Genero-->
+        <div class="form-group col-5">
+          <label>Género</label>
+          <select formControlName="genero" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.genero.errors }">
+            <option value="">--Seleccionar--</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+          </select>
+          <div *ngIf="submitted && f.genero.errors" class="invalid-feedback">
+            <div *ngIf="f.genero.errors.required">Género es requerido</div>
           </div>
         </div>
-      </div>      
-      <div class="form-group col">
-        <label>Género</label>
-        <select formControlName="genero" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.genero.errors }">
-          <option value="">--Seleccionar--</option>
-          <option value="M">Masculino</option>
-          <option value="F">Femenino</option>
-        </select>
-        <div *ngIf="submitted && f.genero.errors" class="invalid-feedback">
-          <div *ngIf="f.genero.errors.required">Género es requerido</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col">
+        <!--Fecha de Nacimiento-->
+        <div class="form-group col-5">
           <label>Fecha de Nacimiento</label>
           <input type="date" formControlName="fecha_nacimiento" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.fecha_nacimiento.errors }" />
@@ -110,6 +97,31 @@
           </div>
         </div>
       </div>
+
+      <!-- Email-->
+      <div class="form-row">
+        <div class="form-group col-10">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email es requerido</div>
+          </div>
+        </div>
+      </div>
+
+      <!--Dirección-->
+      <div class="form-row">
+        <div class="form-group col-10">
+          <label>Dirección</label>
+          <textarea formControlName="direccion" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.direccion.errors }"> </textarea>
+          <div *ngIf="submitted && f.direccion.errors" class="invalid-feedback">
+            <div *ngIf="f.direccion.errors.required">Dirección es requerido</div>
+          </div>
+        </div>
+      </div>
+
       <div class="text-center">
         <button class="btn btn-primary mr-1">Registrar</button>
         <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancelar</button>

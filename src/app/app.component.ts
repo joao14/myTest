@@ -16,7 +16,7 @@ export class AppComponent {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       type_indetificacion: ['', Validators.required],
-      identificacion: ['', Validators.required],
+      identificacion: ['',[Validators.required,Validators.min(0), Validators.max(13)]],
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],      
       email: ['', [Validators.required, Validators.email]],
