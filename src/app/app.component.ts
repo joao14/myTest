@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
+import { CustomValidator } from '../validators/CustomValidator';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +15,11 @@ export class AppComponent {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       type_indetificacion: ['', Validators.required],
-      identificacion: ['',[Validators.required,Validators.min(0), Validators.max(13)]],
+      identificacion: ['', [Validators.required, CustomValidator.numberValidator]],
       nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],      
+      apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.minLength(13)]],
+      telefono: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]],
       celular: ['', [Validators.required, Validators.minLength(10)]],
       direccion: ['', [Validators.required]],
       genero: ['', [Validators.required]],
@@ -28,22 +27,20 @@ export class AppComponent {
     })
   }
 
-  // convenience getter for easy access to form fields
+  // Método uqe permite acceder de mejor manera los los valores de lo elementos
   get f() { return this.registerForm.controls; }
 
+  //Metodo que permite enviar la informacion al servicio
   onSubmit() {
-    console.log("Guardando");
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
-
-    // display form values on success
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
   }
 
+  //Metodo quqe permite resetear el formulario
   onReset() {
     this.submitted = false;
     this.registerForm.reset();

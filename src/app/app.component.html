@@ -1,17 +1,18 @@
+<br>
+<a class="btn btn-primary mr-1" [routerLink]="['/users']" [routerLinkActiveOptions]="{exact: true}">Lista de Usuarios</a>
 <!-- Plantilla para ingresar un nuevo usuario -->
 <div class="card m-3">
   <h5 class="card-header">Registro del nuevo usuario</h5>
   <div class="card-body">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
-        <!-- Tipo de indentificacion-->
+        <!-- Tipo de indentisficacion-->
         <div class="form-group col-5">
           <label>Tipo de Identificación</label>
           <select formControlName="type_indetificacion" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.type_indetificacion.errors }">
             <option value="">--Seleccionar--</option>
             <option value="C">Cédula</option>
-            <option value="P">Pasaporte</option>
             <option value="R">Ruc</option>
           </select>
           <div *ngIf="submitted && f.type_indetificacion.errors" class="invalid-feedback">
@@ -25,7 +26,7 @@
             [ngClass]="{ 'is-invalid': submitted && f.identificacion.errors }" />
           <div *ngIf="submitted && f.identificacion.errors" class="invalid-feedback">
             <div *ngIf="f.identificacion.errors.required">Identificación es requerida</div>
-            <div *ngIf="f.identificacion.errors.required">Identificación solo debe ser números</div>
+            <div *ngIf="f.identificacion.errors.invalidNumber">Solo se permite números</div>
           </div>
         </div>
       </div>
@@ -58,7 +59,8 @@
             [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
           <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
             <div *ngIf="f.telefono.errors.required">Teléfono es requerido</div>
-            <div *ngIf="f.telefono.errors.minlength">Telefono debe tener una longitud de 12</div>
+            <div *ngIf="f.telefono.errors.minlength">Teléfono debe tener una longitud minima de 7</div>
+            <div *ngIf="f.telefono.errors.maxLength">Teléfono debe tener una longitud máxima de 10</div>
           </div>
         </div>
         <!--Celular-->
@@ -106,6 +108,7 @@
             [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Email es requerido</div>
+            <div *ngIf="f.email.errors.email">Email debe ser un correo valido</div>
           </div>
         </div>
       </div>
